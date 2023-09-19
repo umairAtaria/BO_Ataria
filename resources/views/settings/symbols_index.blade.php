@@ -36,7 +36,9 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title mx-4">Symbols List</h3>
+                        @hasrole('admin')
                         <button class="btn btn-primary sync">Import symbols</button>
+                        @endhasrole
                     </div>
 
                     <div class="card-body">

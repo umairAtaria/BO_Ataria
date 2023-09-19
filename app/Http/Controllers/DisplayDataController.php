@@ -63,7 +63,7 @@ class DisplayDataController extends Controller
     
         return response()->json(['data' => $data]);
    
-
+    }
 
     public function sync_api()
     {

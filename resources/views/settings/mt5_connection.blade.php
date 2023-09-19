@@ -14,6 +14,21 @@
         <div class="row">
             <div class="col-md-12 col-xl-12">
                 <div class="card">
+                 @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible close-2 show px-4 py-4 mx-2 my-2" role="alert" style="margin-bottom: 10px;">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible close-2 show px-4 py-4 mx-2 my-2" style="margin-bottom: 10px;">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card-header">
                         <h3 class="card-title mx-4">Connection Status</h3>
                         <div class="spinner-border text-warning me-2" role="status">
@@ -108,6 +123,9 @@
                     }
                 }
             });
+
+            // hide alert after 3 seconds . fade out
+            $('.alert').delay(3000).fadeOut(500);
 
         });
     </script>

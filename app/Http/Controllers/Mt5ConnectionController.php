@@ -17,7 +17,7 @@ class Mt5ConnectionController extends Controller
     }
     
     public function save_connection(Request $request){
-
+        // dd($request->all());
         $request->validate([
             'mt5_ip' => 'required',
             'mt5_port' => 'required',
@@ -29,7 +29,7 @@ class Mt5ConnectionController extends Controller
         $mtApi = new MTWebAPI();
 
         if (($error_code = $mtApi->Connect($request->mt5_ip, $request->mt5_port, 300, $request->mt5_login, $request->mt5_password)) != MTRetCode::MT_RET_OK) {
-            return redirect()->route('mt5_connection')->with('error', 'Connection details are not correct');
+            return back()->withErrors('Connection details are not correct');
         } else {
             if (count($creds) > 0) {
                 $creds[0]->delete();
@@ -42,7 +42,7 @@ class Mt5ConnectionController extends Controller
             $mt5_con->password = $request->mt5_password;
             $mt5_con->save();
 
-            return redirect()->route('mt5_connection')->with('success', 'Connection details saved successfully');
+            return back()->withSuccess('Connection details saved successfully');
         }
     }
 
